@@ -2,6 +2,7 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
+import KAGO_framework.model.abitur.netz.Client;
 import my_project.model.Ball;
 import my_project.view.InputManager;
 
@@ -11,9 +12,10 @@ import java.awt.event.MouseEvent;
  * Ein Objekt der Klasse ProgramController dient dazu das Programm zu steuern. Die updateProgram - Methode wird
  * mit jeder Frame im laufenden Programm aufgerufen.
  */
-public class ProgramController {
+public class ProgramController extends Client {
 
     //Attribute
+    private double test;
 
 
     // Referenzen
@@ -27,6 +29,8 @@ public class ProgramController {
      * @param viewController das viewController-Objekt des Programms
      */
     public ProgramController(ViewController viewController){
+        super("10.17.128.87", 1337);
+        send("Hello There");
         this.viewController = viewController;
     }
 
@@ -46,6 +50,20 @@ public class ProgramController {
      * @param dt Zeit seit letzter Frame
      */
     public void updateProgram(double dt){
-
+        if(test>1) {
+            send("command-1-simon");
+        }else if(test<=1) {
+            send("command-2-simon");
+        }else if(test<=0) {
+            test = 2;
+        }else{
+            test-=dt;
+        }
     }
+
+    @Override
+    public void processMessage(String pMessage) {
+        System.out.println(pMessage);
+    }
+
 }
