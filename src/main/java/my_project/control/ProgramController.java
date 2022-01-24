@@ -6,6 +6,7 @@ import KAGO_framework.model.abitur.netz.Client;
 import my_project.model.Ball;
 import my_project.view.InputManager;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -50,14 +51,20 @@ public class ProgramController extends Client {
      * @param dt Zeit seit letzter Frame
      */
     public void updateProgram(double dt){
-        if(test>1) {
-            send("command-1-simon");
-        }else if(test<=1) {
-            send("command-2-simon");
-        }else if(test<=0) {
-            test = 2;
-        }else{
-            test-=dt;
+        if(ViewController.isKeyDown(KeyEvent.VK_W)){
+            send("command#1#simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_D)){
+            send("command#0#simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_S)){
+            send("command#3#simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_A)){
+            send("command#2#simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_SPACE)){
+            send("Hello There");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_X)){
+            send("speed#20#simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_Y)){
+            send("speed#-20#simon");
         }
     }
 
