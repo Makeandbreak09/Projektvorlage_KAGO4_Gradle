@@ -1,12 +1,13 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.netz.Client;
+import my_project.model.Ball;
+import my_project.view.InputManager;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 /**
  * Ein Objekt der Klasse ProgramController dient dazu das Programm zu steuern. Die updateProgram - Methode wird
@@ -15,6 +16,7 @@ import java.awt.event.KeyListener;
 public class ProgramController extends Client {
 
     //Attribute
+    private double test;
 
 
     // Referenzen
@@ -67,4 +69,5 @@ public class ProgramController extends Client {
     public void processMessage(String pMessage) {
         System.out.println(pMessage);
     }
+
 }
