@@ -1,17 +1,18 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
-import KAGO_framework.model.abitur.datenstrukturen.Queue;
-import my_project.model.Ball;
-import my_project.view.InputManager;
+import KAGO_framework.model.abitur.netz.Client;
 
-import java.awt.event.MouseEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Ein Objekt der Klasse ProgramController dient dazu das Programm zu steuern. Die updateProgram - Methode wird
  * mit jeder Frame im laufenden Programm aufgerufen.
  */
-public class ProgramController {
+public class ProgramController extends Client {
 
     //Attribute
 
@@ -27,6 +28,7 @@ public class ProgramController {
      * @param viewController das viewController-Objekt des Programms
      */
     public ProgramController(ViewController viewController){
+        super("192.168.178.29", 6666);
         this.viewController = viewController;
     }
 
@@ -35,10 +37,8 @@ public class ProgramController {
      * Sie erstellt die leeren Datenstrukturen, zu Beginn nur eine Queue
      */
     public void startProgram() {
-        // Erstelle ein Objekt der Klasse Ball und lasse es zeichnen
-        Ball ball1 = new Ball(150,150);
-        viewController.draw(ball1);
-
+        send("help");
+        send("joinGame simon");
     }
 
     /**
@@ -46,6 +46,25 @@ public class ProgramController {
      * @param dt Zeit seit letzter Frame
      */
     public void updateProgram(double dt){
+        if(ViewController.isKeyDown(KeyEvent.VK_Q)){
+            send("move simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_W)){
+            send("setSpeed 2 simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_S)){
+            send("setSpeed 0.5 simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_E)){
+            send("spawn Banana simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_R)){
+            send("spawn Portal simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_D)){
+            send("destroy Banana simon");
+        }else if(ViewController.isKeyDown(KeyEvent.VK_F)){
+            send("destroy Portal simon");
+        }
+    }
 
+    @Override
+    public void processMessage(String pMessage) {
+        System.out.println(pMessage);
     }
 }
